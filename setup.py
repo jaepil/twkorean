@@ -6,7 +6,7 @@ from __future__ import print_function
 
 import os
 
-from distutils.core import setup
+from setuptools import setup
 
 try:
     from urllib import urlretrieve
