@@ -7,6 +7,7 @@ from __future__ import print_function
 import os
 
 from setuptools import setup
+from setuptools.command.install import install
 
 try:
     from urllib import urlretrieve
@@ -14,7 +15,7 @@ except:
     from urllib.request import urlretrieve
 
 
-__VERSION__ = "0.1.1"
+__VERSION__ = "0.1.4"
 
 _JAVA_LIB_URLS = [
     "https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.4/scala-library-2.11.4.jar",
@@ -26,16 +27,20 @@ _JAVA_LIB_URLS = [
 _PATH_TO_LIB = os.path.join(os.path.abspath(os.path.dirname((__file__))), "twkorean/data/lib")
 
 
-def download_jars(target_path):
-    for url in _JAVA_LIB_URLS:
-        jar_name = os.path.basename(url)
-        jar_path = os.path.join(target_path, jar_name)
-        if not os.path.exists(jar_path):
-            print("Downloading java package:", jar_name)
-            urlretrieve(url, jar_path)
+class InstallCommand(install):
+    @staticmethod
+    def download_jars(target_path):
+        for url in _JAVA_LIB_URLS:
+            jar_name = os.path.basename(url)
+            jar_path = os.path.join(target_path, jar_name)
+            if not os.path.exists(jar_path):
+                print("Downloading java package:", jar_name)
+                print("Saved java package to:", jar_path)
+                urlretrieve(url, jar_path)
 
-
-download_jars(target_path=_PATH_TO_LIB)
+    def run(self):
+        self.download_jars(target_path=_PATH_TO_LIB)
+        install.run(self)
 
 
 setup(
@@ -73,5 +78,8 @@ setup(
         "morphology", "analyzer"
         "korean", "tokenizer"
     ],
-    description="Python interface to twitter-korean-text, a Korean morphological analyzer."
+    description="Python interface to twitter-korean-text, a Korean morphological analyzer.",
+    cmdclass={
+        'install': InstallCommand,
+    }
 )
