@@ -62,9 +62,16 @@ setup(
     url="https://github.com/jaepil/twkorean/",
     download_url="https://github.com/jaepil/twkorean/tree/master",
     classifiers=[
+        "Environment :: Console",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Science/Research",
+        "Natural Language :: Korean",
         "Programming Language :: Java",
+        "Programming Language :: Python",
         "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+        "Topic :: Text Processing :: Linguistic"
     ],
     platforms=[
         "Operating System :: MacOS :: MacOS X",
