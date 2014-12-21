@@ -15,7 +15,7 @@ except:
     from urllib.request import urlretrieve
 
 
-__VERSION__ = "0.1.4"
+__VERSION__ = "0.1.5"
 
 _JAVA_LIB_URLS = [
     "https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.4/scala-library-2.11.4.jar",
