@@ -55,6 +55,7 @@ setup(
     author="Jaepil Jeong",
     author_email="jaepil@{nospam}appspand.com",
     url="https://github.com/jaepil/twkorean/",
+    download_url="https://github.com/jaepil/twkorean/tree/master",
     classifiers=[
         "Programming Language :: Java",
         "Programming Language :: Python :: 2.6",
