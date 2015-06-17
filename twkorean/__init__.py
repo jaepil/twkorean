@@ -9,7 +9,7 @@ from collections import namedtuple
 
 import jpype
 
-from escape import to_unicode, to_utf8
+from escape import to_unicode, to_utf8, unicode_type
 
 
 def _init_jvm():
@@ -46,9 +46,9 @@ class TwitterKoreanProcessor(object):
         self._processor = builder.build()
 
     def normalize(self, text):
-        encode = lambda t: jpype.java.lang.String(t) if isinstance(text, unicode)\
+        encode = lambda t: jpype.java.lang.String(t) if isinstance(text, unicode_type)\
             else jpype.java.lang.String(to_unicode(t))
-        decode = lambda t: t if isinstance(text, unicode) else to_utf8(t)
+        decode = lambda t: t if isinstance(text, unicode_type) else to_utf8(t)
 
         return decode(self._processor.normalize(encode(text)))
 
@@ -56,9 +56,9 @@ class TwitterKoreanProcessor(object):
     #     pass
 
     def tokenize(self, text):
-        encode = lambda t: jpype.java.lang.String(t) if isinstance(text, unicode)\
+        encode = lambda t: jpype.java.lang.String(t) if isinstance(text, unicode_type)\
             else jpype.java.lang.String(to_unicode(t))
-        decode = lambda t: t if isinstance(text, unicode) else to_utf8(t)
+        decode = lambda t: t if isinstance(text, unicode_type) else to_utf8(t)
 
         tokens = self._processor.tokenize(encode(text))
         return [
@@ -68,17 +68,17 @@ class TwitterKoreanProcessor(object):
         ]
 
     def tokenize_to_strings(self, text):
-        encode = lambda t: jpype.java.lang.String(t) if isinstance(text, unicode)\
+        encode = lambda t: jpype.java.lang.String(t) if isinstance(text, unicode_type)\
             else jpype.java.lang.String(to_unicode(t))
-        decode = lambda t: t if isinstance(text, unicode) else to_utf8(t)
+        decode = lambda t: t if isinstance(text, unicode_type) else to_utf8(t)
 
         tokens = self._processor.tokenizeToStrings(encode(text))
         return [decode(t) for t in tokens]
 
     def tokenize_with_index(self, text):
-        encode = lambda t: jpype.java.lang.String(t) if isinstance(text, unicode)\
+        encode = lambda t: jpype.java.lang.String(t) if isinstance(text, unicode_type)\
             else jpype.java.lang.String(to_unicode(t))
-        decode = lambda t: t if isinstance(text, unicode) else to_utf8(t)
+        decode = lambda t: t if isinstance(text, unicode_type) else to_utf8(t)
 
         result = []
         tokens = self._processor.tokenizeWithIndex(encode(text))
@@ -92,9 +92,9 @@ class TwitterKoreanProcessor(object):
         return result
 
     # def tokenize_with_index_with_stemmer(self, text):
-    #     encode = lambda t: jpype.java.lang.String(t) if isinstance(text, unicode)\
+    #     encode = lambda t: jpype.java.lang.String(t) if isinstance(text, unicode_type)\
     #         else jpype.java.lang.String(to_unicode(t))
-    #     decode = lambda t: t if isinstance(text, unicode) else to_utf8(t)
+    #     decode = lambda t: t if isinstance(text, unicode_type) else to_utf8(t)
 
     #     token = self._processor.tokenizeWithIndexWithStemmer(encode(text))
     #     segments = []
