@@ -9,7 +9,7 @@ from collections import namedtuple
 
 import jpype
 
-from escape import to_unicode, to_utf8, unicode_type
+from .escape import to_unicode, to_utf8, unicode_type
 
 
 def _init_jvm():
